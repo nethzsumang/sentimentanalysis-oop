@@ -2,27 +2,27 @@ from app.bl.blFile import blFile
 from framework.MVC.Controller import Controller
 
 
-class VapeController(Controller):
+class TobaccoController(Controller):
     @staticmethod
     def check_cache(o_app, a_params):
-        filename = o_app.get('APP', 'VAPE')['PICKLE_FILE']
+        filename = o_app.get('APP', 'TOBACCO')['PICKLE_FILE']
         exists = blFile.checkIfExists(filename)
         if exists:
-            return Controller.redirect('VapeController@get_cache', {})
+            return Controller.redirect('TobaccoController@get_cache', {})
 
-        return Controller.redirect('VapeController@fetch_tweets', {})
+        return Controller.redirect('TobaccoController@fetch_tweets', {})
 
     @staticmethod
     def fetch_tweets(o_app, a_params):
-        print('Fetching vape tweets...')
+        print('Fetching tobacco tweets...')
         pass
 
     @staticmethod
     def get_cache(o_app, a_params):
-        print('Getting vape tweets cache...')
+        print('Getting tobacco tweets cache...')
         pass
 
     @staticmethod
     def show_graph(o_app, a_params):
-        print('Showing vape graph...')
+        print('Showing tobacco graph...')
         pass

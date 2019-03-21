@@ -10,4 +10,9 @@ class IndexController(Controller):
 
     @staticmethod
     def redirector(o_app, a_params):
-        o_app.dump(a_params['mode'])
+        if a_params['mode'] == 'VAPE':
+            return Controller.redirect('VapeController@check_cache', {})
+        elif a_params['mode'] == 'TOBACCO':
+            return Controller.redirect('TobaccoController@check_cache', {})
+
+        return Controller.redirect(False)
