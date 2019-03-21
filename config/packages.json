@@ -1,6 +1,11 @@
 {
     "PYTHON_VERSION": "3.5.0",
     "dependencies": {
-        "var_dump": "1.0.0"
+        "var_dump": "1.0.0",
+        "vaderSentiment": "1.0.0",
+        "pyquery": "1.0.0",
+        "requests": "1.0.0",
+        "xlwt": "1.0.0",
+        "matplotlib": "1.0.0"
     }
 }
