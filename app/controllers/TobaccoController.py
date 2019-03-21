@@ -23,6 +23,10 @@ class TobaccoController(Controller):
         pass
 
     @staticmethod
+    def analyze(o_app, a_params):
+        pass
+
+    @staticmethod
     def show_graph(o_app, a_params):
         print('Showing tobacco graph...')
         pass
