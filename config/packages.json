@@ -1,0 +1,6 @@
+{
+    "PYTHON_VERSION": "3.5.0",
+    "dependencies": {
+        "var_dump": "1.0.0"
+    }
+}
