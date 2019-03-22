@@ -60,3 +60,4 @@ class VapeController(Controller):
     @staticmethod
     def show_graph(o_app, a_params):
         print('Showing vape graph...')
+        return Controller.redirect('TobaccoController@check_cache', {})

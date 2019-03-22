@@ -46,7 +46,6 @@ class blFetch:
         end_month = int(a_params["END_MONTH"])
 
         while year != end_year or month != end_month+1:
-            print(str(year) + ' ' + str(month))
             start_date = Date(a_date=[year, month, 1]).get("%Y-%m-%d")
             end_day = Date.get_last_day_of_month(year, month)
             end_date = Date(a_date=[year, month, end_day]).get("%Y-%m-%d")
