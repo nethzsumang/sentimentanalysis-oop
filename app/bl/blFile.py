@@ -17,31 +17,29 @@ class blFile:
     @staticmethod
     def save_object(s_filename, a_data):
         try:
-            pickle = PickleFile(path_join('resources', 'storage', s_filename + '.data'), 'w')
+            pickle = PickleFile(
+                path_join("resources", "storage", s_filename + ".data"), "w"
+            )
             pickle.write(a_data)
             return True
         except Exception:
             return {
-                'result': False,
-                'code': 'EXCEPTION_OCCURRED',
-                'message': 'Saving object to pickle file failed.'
+                "result": False,
+                "code": "EXCEPTION_OCCURRED",
+                "message": "Saving object to pickle file failed.",
             }
 
     @staticmethod
     def load_object(path):
         try:
             data = PickleFile(path).read()
-            return {
-                'result': True,
-                'data': data
-            }
+            return {"result": True, "data": data}
         except Exception:
             return {
-                'result': False,
-                'code': 'EXCEPTION_OCCURRED',
-                'message': 'Loading pickle file failed.'
+                "result": False,
+                "code": "EXCEPTION_OCCURRED",
+                "message": "Loading pickle file failed.",
             }
-
 
     @staticmethod
     def save_to_xlsx(a_data, s_path):

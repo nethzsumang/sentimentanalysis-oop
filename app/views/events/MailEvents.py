@@ -21,4 +21,5 @@ class MailEvents(Event):
         )
 
         from tkinter import messagebox
-        messagebox.showinfo('Validation Errors', validator.get_errors())
+
+        messagebox.showinfo("Validation Errors", validator.get_errors())
