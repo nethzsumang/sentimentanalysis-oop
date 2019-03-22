@@ -6,7 +6,7 @@ class TobaccoController(Controller):
     @staticmethod
     def check_cache(o_app, a_params):
         filename = o_app.get('APP', 'TOBACCO')['PICKLE_FILE']
-        exists = blFile.checkIfExists(filename)
+        exists = blFile.check_if_exists(filename)
         if exists:
             return Controller.redirect('TobaccoController@get_cache', {})
 

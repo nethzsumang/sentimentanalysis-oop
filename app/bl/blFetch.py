@@ -11,7 +11,6 @@ class blFetch:
 
     @staticmethod
     def fetch_tweets(a_params):
-        from var_dump import var_dump
         time_frames = blFetch.build_time_frames_array(a_params)
 
         for o_yearly_data in time_frames:
