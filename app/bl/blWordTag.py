@@ -39,7 +39,8 @@ class blWordTag:
             result_arr.append({
                 'statement': tag,
                 'pos': response['pos'],
-                'neg': response['neg']
+                'neg': response['neg'],
+                'tag': libNltk.pos_tagging(tag)
             })
 
         return result_arr

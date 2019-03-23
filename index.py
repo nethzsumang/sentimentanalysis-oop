@@ -9,5 +9,7 @@ import nltk
 
 # download nltk data
 nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
 
 bootstrap.start()

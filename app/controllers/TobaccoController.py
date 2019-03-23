@@ -1,6 +1,8 @@
 from app.bl.blAnalyze import blAnalyze
 from app.bl.blFetch import blFetch
 from app.bl.blFile import blFile
+from app.bl.blPlot import blPlot
+from app.bl.blWordTag import blWordTag
 from framework.MVC.Controller import Controller
 
 
@@ -39,14 +41,22 @@ class TobaccoController(Controller):
     @staticmethod
     def analyze(o_app, a_params):
         data = a_params["data"]
+        word_tag_arr = blWordTag.create_word_tags(data)
+        response = blWordTag.analyze_word_tags(word_tag_arr)
         data = blAnalyze.analyze_tweets(data)
         return Controller.redirect(
-            "TobaccoController@save_data", {"data": data, "cached": a_params["cached"]}
+            "TobaccoController@save_data", {
+                "data": data,
+                "cached": a_params["cached"],
+                "word_tags": response
+            }
         )
 
     @staticmethod
     def save_data(o_app, a_params):
         data = a_params["data"]
+        blFile.save_tobacco_word_tags_to_xlsx(a_params['word_tags'])
+
         if not a_params["cached"]:
             blFile.save_object("data_tobacco", data)
 
@@ -55,3 +65,8 @@ class TobaccoController(Controller):
     @staticmethod
     def show_graph(o_app, a_params):
         print("Showing tobacco graph...")
+        data = a_params['data']
+        data = blPlot.prepare_values(data)
+        blPlot.plot_tobacco(data)
+        input('Press enter to exit...')
+        return Controller.redirect(False)

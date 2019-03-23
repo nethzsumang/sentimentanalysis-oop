@@ -1,6 +1,7 @@
 from app.bl.blAnalyze import blAnalyze
 from app.bl.blFetch import blFetch
 from app.bl.blFile import blFile
+from app.bl.blPlot import blPlot
 from app.bl.blWordTag import blWordTag
 from framework.MVC.Controller import Controller
 
@@ -65,5 +66,6 @@ class VapeController(Controller):
     def show_graph(o_app, a_params):
         print("Showing vape graph...")
         data = a_params['data']
-        o_app.dump(data)
+        data = blPlot.prepare_values(data)
+        blPlot.plot_vape(data)
         return Controller.redirect("TobaccoController@check_cache", {})

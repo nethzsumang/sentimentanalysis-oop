@@ -121,6 +121,7 @@ class blFile:
         sheet.write(0, 0, 'Word')
         sheet.write(0, 1, 'Positive')
         sheet.write(0, 2, 'Negative')
+        sheet.write(0, 3, 'POS Tag')
 
         row = 1
 
@@ -128,6 +129,7 @@ class blFile:
             sheet.write(row, 0, word_tag['statement'])
             sheet.write(row, 1, word_tag['pos'])
             sheet.write(row, 2, word_tag['neg'])
+            sheet.write(row, 3, word_tag['tag'])
 
             row = row + 1
 
@@ -146,6 +148,7 @@ class blFile:
         sheet.write(0, 0, 'Word')
         sheet.write(0, 1, 'Positive')
         sheet.write(0, 2, 'Negative')
+        sheet.write(0, 3, 'POS Tag')
 
         row = 1
 
@@ -153,6 +156,8 @@ class blFile:
             sheet.write(row, 0, word_tag['statement'])
             sheet.write(row, 1, word_tag['pos'])
             sheet.write(row, 2, word_tag['neg'])
+            sheet.write(row, 3, word_tag['tag'])
+
 
             row = row + 1
 
