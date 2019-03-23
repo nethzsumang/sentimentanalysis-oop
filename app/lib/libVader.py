@@ -7,4 +7,21 @@ class libVader:
 
     @staticmethod
     def analyze(s_statement):
-        return SentimentIntensityAnalyzer().polarity_scores(s_statement.decode("utf-8"))
+        if isinstance(s_statement, str):
+            return SentimentIntensityAnalyzer().polarity_scores(s_statement)
+        else:
+            return SentimentIntensityAnalyzer().polarity_scores(s_statement.decode('utf-8'))
+
+
+    @staticmethod
+    def remove_noise(statement_arr):
+        word_list = []
+        for statement in statement_arr:
+            result = libVader.analyze(statement)
+            pos = result['pos']
+            neg = result['neg']
+
+            if neg != 0.0 or pos != 0.0:
+                word_list.append(statement)
+
+        return list(set(word_list))

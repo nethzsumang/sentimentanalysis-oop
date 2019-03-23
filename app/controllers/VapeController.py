@@ -1,6 +1,7 @@
 from app.bl.blAnalyze import blAnalyze
 from app.bl.blFetch import blFetch
 from app.bl.blFile import blFile
+from app.bl.blWordTag import blWordTag
 from framework.MVC.Controller import Controller
 
 
@@ -39,14 +40,22 @@ class VapeController(Controller):
     @staticmethod
     def analyze(o_app, a_params):
         data = a_params["data"]
+        word_tag_arr = blWordTag.create_word_tags(data)
+        response = blWordTag.analyze_word_tags(word_tag_arr)
         data = blAnalyze.analyze_tweets(data)
         return Controller.redirect(
-            "VapeController@save_data", {"data": data, "cached": a_params["cached"]}
+            "VapeController@save_data", {
+                "data": data,
+                "cached": a_params["cached"],
+                "word_tags": response
+            }
         )
 
     @staticmethod
     def save_data(o_app, a_params):
         data = a_params["data"]
+        blFile.save_vape_word_tags_to_xlsx(a_params['word_tags'])
+
         if not a_params["cached"]:
             blFile.save_object("data_vape", data)
 
@@ -55,4 +64,6 @@ class VapeController(Controller):
     @staticmethod
     def show_graph(o_app, a_params):
         print("Showing vape graph...")
+        data = a_params['data']
+        o_app.dump(data)
         return Controller.redirect("TobaccoController@check_cache", {})

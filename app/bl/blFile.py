@@ -1,4 +1,6 @@
 import os
+from calendar import calendar
+
 import xlwt
 
 from framework.Data.File.File import File
@@ -92,7 +94,6 @@ class blFile:
                 sheet.write(13, 0, "Date Posted")
                 sheet.write(13, 1, "Tweet")
                 sheet.write(13, 2, "Polarity")
-                # sheet.write(13, 3, 'Objectivity')
                 sheet.write(13, 3, "Remarks")
 
                 row_num = 14
@@ -101,7 +102,6 @@ class blFile:
                     sheet.write(row_num, 0, o_statement.date)
                     sheet.write(row_num, 1, o_statement.message.decode("utf-8"))
                     sheet.write(row_num, 2, o_statement.compound)
-                    # sheet.write(row_num, 3, o_statement.objectivity_score)
                     sheet.write(row_num, 3, o_statement.sentiment_grade)
 
                     row_num = row_num + 1
@@ -110,3 +110,53 @@ class blFile:
             os.remove(s_path)
 
         book.save(s_path)
+
+    @staticmethod
+    def save_vape_word_tags_to_xlsx(word_tags):
+        path = path_join('resources', 'storage', 'WordTagsVape.xls')
+
+        book = xlwt.Workbook()
+        sheet = book.add_sheet('Word Tags')
+
+        sheet.write(0, 0, 'Word')
+        sheet.write(0, 1, 'Positive')
+        sheet.write(0, 2, 'Negative')
+
+        row = 1
+
+        for word_tag in word_tags:
+            sheet.write(row, 0, word_tag['statement'])
+            sheet.write(row, 1, word_tag['pos'])
+            sheet.write(row, 2, word_tag['neg'])
+
+            row = row + 1
+
+        if os.path.isfile(path):
+            os.remove(path)
+
+        book.save(path)
+
+    @staticmethod
+    def save_tobacco_word_tags_to_xlsx(word_tags):
+        path = path_join('resources', 'storage', 'WordTagsTobacco.xls')
+
+        book = xlwt.Workbook()
+        sheet = book.add_sheet('Word Tags')
+
+        sheet.write(0, 0, 'Word')
+        sheet.write(0, 1, 'Positive')
+        sheet.write(0, 2, 'Negative')
+
+        row = 1
+
+        for word_tag in word_tags:
+            sheet.write(row, 0, word_tag['statement'])
+            sheet.write(row, 1, word_tag['pos'])
+            sheet.write(row, 2, word_tag['neg'])
+
+            row = row + 1
+
+        if os.path.isfile(path):
+            os.remove(path)
+
+        book.save(path)

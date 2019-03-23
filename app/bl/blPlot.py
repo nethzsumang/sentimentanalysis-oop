@@ -1,0 +1,2 @@
+class blPlot:
+    pass

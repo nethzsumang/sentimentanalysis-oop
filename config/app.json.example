@@ -5,5 +5,25 @@
     "ROOT_DIR": "C:\\Users\\PH_DEVPC\\Documents\\PERSONAL_PROJS\\sentimentanalysis-oop",
     "INSTITUTION": "none",
     "AUTHOR_NAME": "Kenneth",
-    "APP_KEY": "ydlkuNysdELVc&OqGAKLveMjVqxFoHhAFP0s#MUffMBFaS!s"
+    "APP_KEY": "ydlkuNysdELVc&OqGAKLveMjVqxFoHhAFP0s#MUffMBFaS!s",
+    "VAPE": {
+        "START_YEAR": 2013,
+        "START_MONTH": 1,
+        "END_YEAR": 2019,
+        "END_MONTH": 1,
+        "PICKLE_FILE": "resources/storage/data_vape.data",
+
+        "TWITTER_MAX_TWEETS_PER_MONTH": 10,
+        "TWITTER_SEARCH_QUERY": "vape"
+    },
+    "TOBACCO": {
+        "START_YEAR": 2013,
+        "START_MONTH": 1,
+        "END_YEAR": 2019,
+        "END_MONTH": 1,
+        "PICKLE_FILE": "resources/storage/data_tobacco.data",
+
+        "TWITTER_MAX_TWEETS_PER_MONTH": 10,
+        "TWITTER_SEARCH_QUERY": "tobacco"
+    }
 }
