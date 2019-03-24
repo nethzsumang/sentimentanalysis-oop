@@ -44,8 +44,9 @@ class blFetch:
         month = int(a_params["START_MONTH"])
         end_year = int(a_params["END_YEAR"])
         end_month = int(a_params["END_MONTH"])
+        end_month, end_year = blFetch._get_next_month(end_month, end_year)
 
-        while year != end_year or month != end_month + 1:
+        while not blFetch._compare_months([month, year], [end_month, end_year]):
             start_date = Date(a_date=[year, month, 1]).get("%Y-%m-%d")
             end_day = Date.get_last_day_of_month(year, month)
             end_date = Date(a_date=[year, month, end_day]).get("%Y-%m-%d")
@@ -55,11 +56,41 @@ class blFetch:
             if month == 12:
                 arr_yearly_data.append(YearlyData(arr_monthly_data))
                 arr_monthly_data = []
-                year = year + 1
-                month = 1
             else:
-                if month == end_month:
+                if blFetch._compare_months([month, year], blFetch._get_prev_month(end_month, end_year)):
                     arr_yearly_data.append(YearlyData(arr_monthly_data))
-                month = month + 1
+                    arr_monthly_data = []
+
+            month, year = blFetch._get_next_month(month, year)
 
         return arr_yearly_data
+
+    @staticmethod
+    def _get_next_month(month, year):
+        month = month + 1
+
+        if month > 12:
+            year = year + 1
+            month = 1
+
+        return [month, year]
+
+    @staticmethod
+    def _get_prev_month(month, year):
+        month = month - 1
+
+        if month < 0:
+            year = year - 1
+            month = 12
+
+        return [month, year]
+
+    @staticmethod
+    def _compare_months(date1, date2):
+        month1, year1 = date1
+        month2, year2 = date2
+
+        if month1 == month2 and year1 == year2:
+            return True
+
+        return False
