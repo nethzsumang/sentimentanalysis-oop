@@ -1,5 +1,5 @@
 import os
-from calendar import calendar
+import calendar
 
 import xlwt
 
@@ -45,6 +45,7 @@ class blFile:
 
     @staticmethod
     def save_to_xlsx(a_data, s_path):
+        print('Saving analysis data to XLS...')
         book = xlwt.Workbook()
 
         for o_yearly_data in a_data:
@@ -100,7 +101,7 @@ class blFile:
 
                 for o_statement in o_monthly_data.twitter:
                     sheet.write(row_num, 0, o_statement.date)
-                    sheet.write(row_num, 1, o_statement.message.decode("utf-8"))
+                    sheet.write(row_num, 1, o_statement.message)
                     sheet.write(row_num, 2, o_statement.compound)
                     sheet.write(row_num, 3, o_statement.sentiment_grade)
 
@@ -112,8 +113,8 @@ class blFile:
         book.save(s_path)
 
     @staticmethod
-    def save_vape_word_tags_to_xlsx(word_tags):
-        path = path_join('resources', 'storage', 'WordTagsVape.xls')
+    def save_word_tags_to_xls(word_tags, path):
+        print('Saving word tags to XLS...')
 
         book = xlwt.Workbook()
         sheet = book.add_sheet('Word Tags')
@@ -130,34 +131,6 @@ class blFile:
             sheet.write(row, 1, word_tag['pos'])
             sheet.write(row, 2, word_tag['neg'])
             sheet.write(row, 3, word_tag['tag'])
-
-            row = row + 1
-
-        if os.path.isfile(path):
-            os.remove(path)
-
-        book.save(path)
-
-    @staticmethod
-    def save_tobacco_word_tags_to_xlsx(word_tags):
-        path = path_join('resources', 'storage', 'WordTagsTobacco.xls')
-
-        book = xlwt.Workbook()
-        sheet = book.add_sheet('Word Tags')
-
-        sheet.write(0, 0, 'Word')
-        sheet.write(0, 1, 'Positive')
-        sheet.write(0, 2, 'Negative')
-        sheet.write(0, 3, 'POS Tag')
-
-        row = 1
-
-        for word_tag in word_tags:
-            sheet.write(row, 0, word_tag['statement'])
-            sheet.write(row, 1, word_tag['pos'])
-            sheet.write(row, 2, word_tag['neg'])
-            sheet.write(row, 3, word_tag['tag'])
-
 
             row = row + 1
 

@@ -4,6 +4,7 @@ from app.bl.blFile import blFile
 from app.bl.blPlot import blPlot
 from app.bl.blWordTag import blWordTag
 from framework.MVC.Controller import Controller
+from framework.Utilities.Misc.Utils import path_join
 
 
 class TobaccoController(Controller):
@@ -41,8 +42,8 @@ class TobaccoController(Controller):
     @staticmethod
     def analyze(o_app, a_params):
         data = a_params["data"]
-        word_tag_arr = blWordTag.create_word_tags(data)
-        response = blWordTag.analyze_word_tags(word_tag_arr)
+        data, word_tags = blWordTag.remove_noise(data)
+        response = blWordTag.analyze_word_tags(word_tags)
         data = blAnalyze.analyze_tweets(data)
         return Controller.redirect(
             "TobaccoController@save_data", {
@@ -55,7 +56,9 @@ class TobaccoController(Controller):
     @staticmethod
     def save_data(o_app, a_params):
         data = a_params["data"]
-        blFile.save_tobacco_word_tags_to_xlsx(a_params['word_tags'])
+        data = blAnalyze.analyze_per_month(data)
+        blFile.save_word_tags_to_xls(a_params['word_tags'], path_join('resources', 'storage', 'WordTagsTobacco.xls'))
+        blFile.save_to_xlsx(data, path_join('resources', 'storage', 'TobaccoAnalysis.xls'))
 
         if not a_params["cached"]:
             blFile.save_object("data_tobacco", data)
@@ -67,6 +70,6 @@ class TobaccoController(Controller):
         print("Showing tobacco graph...")
         data = a_params['data']
         data = blPlot.prepare_values(data)
-        blPlot.plot_tobacco(data)
+        blPlot.plot_vape(data, 'Tobacco Analysis')
         input('Press enter to exit...')
         return Controller.redirect(False)

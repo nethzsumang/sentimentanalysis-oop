@@ -7,9 +7,10 @@ class blWordTag:
         pass
 
     @staticmethod
-    def create_word_tags(data):
+    def remove_noise(data):
         print('Getting word tags...')
-        TWEETS_TO_ANALYZE = 10
+        TWEETS_TO_ANALYZE = 20
+        finished_word_tags = False
         word_tags = []
 
         for yearly_data in data:
@@ -22,25 +23,29 @@ class blWordTag:
                     # removes neutral words
                     statement_arr = libVader.remove_noise(statement_arr)
 
-                    word_tags = word_tags + statement_arr
+                    tweet_statement.message = ' '.join(statement_arr)
 
-                    if len(word_tags) >= TWEETS_TO_ANALYZE:
-                        word_tags = word_tags[:10]
-                        return word_tags
-
-        return word_tags
+                    if not finished_word_tags:
+                        if len(word_tags) >= TWEETS_TO_ANALYZE:
+                            finished_word_tags = True
+                            word_tags = word_tags[:TWEETS_TO_ANALYZE]
+                        else:
+                            word_tags = word_tags + statement_arr
+        return [data, word_tags]
 
     @staticmethod
     def analyze_word_tags(word_tags):
-        result_arr =[]
+        print('Analyzing word tags...')
+        result_arr = []
 
         for tag in word_tags:
             response = libVader.analyze(tag)
+            word, tag_value = libNltk.pos_tagging(tag)
             result_arr.append({
-                'statement': tag,
+                'statement': word,
                 'pos': response['pos'],
                 'neg': response['neg'],
-                'tag': libNltk.pos_tagging(tag)
+                'tag': tag_value
             })
 
         return result_arr
