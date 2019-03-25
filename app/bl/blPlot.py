@@ -65,7 +65,7 @@ class blPlot:
         plt.figure()
         plt.title(title)
 
-        plt.plot(year_arr, pos_arr, '-ro', label='Positive Percentage')
+        plt.plot(year_arr, pos_arr, '-go', label='Positive Percentage')
         plt.plot(year_arr, neg_arr, '-ro', label='Negative Percentage')
         plt.legend(loc='upper left')
         plt.savefig(path_join('resources', 'storage', title + '.pdf'))
