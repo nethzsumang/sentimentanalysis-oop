@@ -70,6 +70,6 @@ class TobaccoController(Controller):
         print("Showing tobacco graph...")
         data = a_params['data']
         data = blPlot.prepare_values(data)
-        blPlot.plot_vape(data, 'Tobacco Analysis')
+        blPlot.plot(data, 'Tobacco Analysis')
         input('Press enter to exit...')
         return Controller.redirect(False)

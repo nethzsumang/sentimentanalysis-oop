@@ -70,5 +70,5 @@ class VapeController(Controller):
         print("Showing vape graph...")
         data = a_params['data']
         data = blPlot.prepare_values(data)
-        blPlot.plot_vape(data, 'Vape Analysis')
+        blPlot.plot(data, 'Vape Analysis')
         return Controller.redirect("IndexController@redirector", {'mode': 'TOBACCO'})

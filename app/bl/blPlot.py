@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 
+from framework.Utilities.Misc.Utils import path_join
+
 
 class blPlot:
     @staticmethod
@@ -25,7 +27,8 @@ class blPlot:
         return yearly_values
 
     @staticmethod
-    def plot_vape(data, title):
+    def plot(data, title):
+        # import multiprocessing
         year_arr = []
         pos_arr = []
         neg_arr = []
@@ -38,14 +41,31 @@ class blPlot:
             pos_arr.append(sentiment['pos'])
             neg_arr.append(sentiment['neg'])
 
+        blPlot.plot_graph([year_arr, pos_arr, neg_arr, title])
+        # pool = multiprocessing.Process(target=blPlot.plot_graph, args=([year_arr, pos_arr, neg_arr, title]))
+        # pool.start()
+
         # GRAPH
+        # plt.figure()
+        # plt.title(title)
+        # plt.ion()
+        # plt.show()
+        #
+        # plt.plot(year_arr, pos_arr, label='Positive Percentage')
+        # plt.plot(year_arr, neg_arr, label='Negative Percentage')
+        # plt.legend(loc='upper left')
+        # plt.draw()
+        # plt.pause(0.001)
+        #
+        # plt.show()
+
+    @staticmethod
+    def plot_graph(args):
+        year_arr, pos_arr, neg_arr, title = args
         plt.figure()
         plt.title(title)
-        plt.ion()
-        plt.show()
 
-        plt.plot(year_arr, pos_arr, label='Positive Percentage')
-        plt.plot(year_arr, neg_arr, label='Negative Percentage')
+        plt.plot(year_arr, pos_arr, '-ro', label='Positive Percentage')
+        plt.plot(year_arr, neg_arr, '-ro', label='Negative Percentage')
         plt.legend(loc='upper left')
-        plt.draw()
-        plt.pause(0.001)
+        plt.savefig(path_join('resources', 'storage', title + '.pdf'))
