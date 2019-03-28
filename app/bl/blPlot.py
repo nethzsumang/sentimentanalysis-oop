@@ -8,10 +8,6 @@ class blPlot:
     def prepare_values(a_data):
         yearly_values = []
 
-        # for yearly_data in a_data:
-        #     for monthly_data in yearly_data.monthly_data:
-        #         monthly_data.analyze_month_twitter()
-
         for yearly_data in a_data:
             yearly_data.analyze_year_twitter()
             yearly_values.append({
@@ -28,7 +24,6 @@ class blPlot:
 
     @staticmethod
     def plot(data, title):
-        # import multiprocessing
         year_arr = []
         pos_arr = []
         neg_arr = []
@@ -42,22 +37,6 @@ class blPlot:
             neg_arr.append(sentiment['neg'])
 
         blPlot.plot_graph([year_arr, pos_arr, neg_arr, title])
-        # pool = multiprocessing.Process(target=blPlot.plot_graph, args=([year_arr, pos_arr, neg_arr, title]))
-        # pool.start()
-
-        # GRAPH
-        # plt.figure()
-        # plt.title(title)
-        # plt.ion()
-        # plt.show()
-        #
-        # plt.plot(year_arr, pos_arr, label='Positive Percentage')
-        # plt.plot(year_arr, neg_arr, label='Negative Percentage')
-        # plt.legend(loc='upper left')
-        # plt.draw()
-        # plt.pause(0.001)
-        #
-        # plt.show()
 
     @staticmethod
     def plot_graph(args):
