@@ -9,7 +9,7 @@ class blWordTag:
     @staticmethod
     def remove_noise(data):
         print('Getting word tags...')
-        TWEETS_TO_ANALYZE = 20
+        TWEETS_TO_ANALYZE = 50
         finished_word_tags = False
         word_tags = []
 

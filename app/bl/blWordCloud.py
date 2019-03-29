@@ -28,6 +28,7 @@ class blWordCloud:
         figure = plt.figure()
 
         figure.add_subplot(1, 2, 1)
+        plt.title('Vape Word Cloud')
         plt.imshow(wordcloud_vape)
 
         # disable ticks
@@ -35,6 +36,7 @@ class blWordCloud:
         plt.gca().axes.get_yaxis().set_visible(False)
 
         figure.add_subplot(1, 2, 2)
+        plt.title('Tobacco Word Cloud')
         plt.imshow(wordcloud_tobacco)
 
         # disable ticks
