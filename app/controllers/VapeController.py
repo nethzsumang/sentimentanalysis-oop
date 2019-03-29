@@ -46,19 +46,18 @@ class VapeController(Controller):
         response = blWordTag.analyze_word_tags(word_tags)
         data = blAnalyze.analyze_tweets(data)
         return Controller.redirect(
-            "VapeController@save_data", {
-                "data": data,
-                "cached": a_params["cached"],
-                "word_tags": response
-            }
+            "VapeController@save_data",
+            {"data": data, "cached": a_params["cached"], "word_tags": response},
         )
 
     @staticmethod
     def save_data(o_app, a_params):
         data = a_params["data"]
         data = blAnalyze.analyze_per_month(data)
-        blFile.save_word_tags_to_xls(a_params['word_tags'], path_join('resources', 'storage', 'WordTagsVape.xls'))
-        blFile.save_to_xlsx(data, path_join('resources', 'storage', 'VapeAnalysis.xls'))
+        blFile.save_word_tags_to_xls(
+            a_params["word_tags"], path_join("resources", "storage", "WordTagsVape.xls")
+        )
+        blFile.save_to_xlsx(data, path_join("resources", "storage", "VapeAnalysis.xls"))
 
         if not a_params["cached"]:
             blFile.save_object("data_vape", data)
@@ -68,7 +67,7 @@ class VapeController(Controller):
     @staticmethod
     def show_graph(o_app, a_params):
         print("Showing vape graph...")
-        data = a_params['data']
+        data = a_params["data"]
         data = blPlot.prepare_values(data)
-        blPlot.plot(data, 'Vape Analysis')
-        return Controller.redirect("IndexController@redirector", {'mode': 'TOBACCO'})
+        blPlot.plot(data, "Vape Analysis")
+        return Controller.redirect("IndexController@redirector", {"mode": "TOBACCO"})

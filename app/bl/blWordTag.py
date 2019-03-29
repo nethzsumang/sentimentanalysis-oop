@@ -8,7 +8,7 @@ class blWordTag:
 
     @staticmethod
     def remove_noise(data):
-        print('Getting word tags...')
+        print("Getting word tags...")
         TWEETS_TO_ANALYZE = 50
         finished_word_tags = False
         word_tags = []
@@ -23,7 +23,7 @@ class blWordTag:
                     # removes neutral words
                     statement_arr = libVader.remove_noise(statement_arr)
 
-                    tweet_statement.message = ' '.join(statement_arr)
+                    tweet_statement.message = " ".join(statement_arr)
 
                     if not finished_word_tags:
                         if len(word_tags) >= TWEETS_TO_ANALYZE:
@@ -35,17 +35,19 @@ class blWordTag:
 
     @staticmethod
     def analyze_word_tags(word_tags):
-        print('Analyzing word tags...')
+        print("Analyzing word tags...")
         result_arr = []
 
         for tag in word_tags:
             response = libVader.analyze(tag)
             word, tag_value = libNltk.pos_tagging(tag)
-            result_arr.append({
-                'statement': word,
-                'pos': response['pos'],
-                'neg': response['neg'],
-                'tag': tag_value
-            })
+            result_arr.append(
+                {
+                    "statement": word,
+                    "pos": response["pos"],
+                    "neg": response["neg"],
+                    "tag": tag_value,
+                }
+            )
 
         return result_arr

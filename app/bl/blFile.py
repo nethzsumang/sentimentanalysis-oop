@@ -45,7 +45,7 @@ class blFile:
 
     @staticmethod
     def save_to_xlsx(a_data, s_path):
-        print('Saving analysis data to XLS...')
+        print("Saving analysis data to XLS...")
         book = xlwt.Workbook()
 
         for o_yearly_data in a_data:
@@ -114,23 +114,23 @@ class blFile:
 
     @staticmethod
     def save_word_tags_to_xls(word_tags, path):
-        print('Saving word tags to XLS...')
+        print("Saving word tags to XLS...")
 
         book = xlwt.Workbook()
-        sheet = book.add_sheet('Word Tags')
+        sheet = book.add_sheet("Word Tags")
 
-        sheet.write(0, 0, 'Word')
-        sheet.write(0, 1, 'Positive')
-        sheet.write(0, 2, 'Negative')
-        sheet.write(0, 3, 'POS Tag')
+        sheet.write(0, 0, "Word")
+        sheet.write(0, 1, "Positive")
+        sheet.write(0, 2, "Negative")
+        sheet.write(0, 3, "POS Tag")
 
         row = 1
 
         for word_tag in word_tags:
-            sheet.write(row, 0, word_tag['statement'])
-            sheet.write(row, 1, word_tag['pos'])
-            sheet.write(row, 2, word_tag['neg'])
-            sheet.write(row, 3, word_tag['tag'])
+            sheet.write(row, 0, word_tag["statement"])
+            sheet.write(row, 1, word_tag["pos"])
+            sheet.write(row, 2, word_tag["neg"])
+            sheet.write(row, 3, word_tag["tag"])
 
             row = row + 1
 

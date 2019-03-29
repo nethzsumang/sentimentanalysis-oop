@@ -57,7 +57,9 @@ class blFetch:
                 arr_yearly_data.append(YearlyData(arr_monthly_data))
                 arr_monthly_data = []
             else:
-                if blFetch._compare_months([month, year], blFetch._get_prev_month(end_month, end_year)):
+                if blFetch._compare_months(
+                    [month, year], blFetch._get_prev_month(end_month, end_year)
+                ):
                     arr_yearly_data.append(YearlyData(arr_monthly_data))
                     arr_monthly_data = []
 

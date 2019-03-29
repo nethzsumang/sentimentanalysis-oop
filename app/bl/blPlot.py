@@ -10,15 +10,17 @@ class blPlot:
 
         for yearly_data in a_data:
             yearly_data.analyze_year_twitter()
-            yearly_values.append({
-                'year': yearly_data.year,
-                'sentiment': {
-                    'pos': yearly_data.twitter_pos_ave,
-                    'neg': yearly_data.twitter_neg_ave,
-                    'neu': yearly_data.twitter_neu_ave
-                },
-                'data': yearly_data
-            })
+            yearly_values.append(
+                {
+                    "year": yearly_data.year,
+                    "sentiment": {
+                        "pos": yearly_data.twitter_pos_ave,
+                        "neg": yearly_data.twitter_neg_ave,
+                        "neu": yearly_data.twitter_neu_ave,
+                    },
+                    "data": yearly_data,
+                }
+            )
 
         return yearly_values
 
@@ -29,12 +31,12 @@ class blPlot:
         neg_arr = []
 
         for yearly_data in data:
-            year = yearly_data['year']
-            sentiment = yearly_data['sentiment']
+            year = yearly_data["year"]
+            sentiment = yearly_data["sentiment"]
 
             year_arr.append(year)
-            pos_arr.append(sentiment['pos'])
-            neg_arr.append(sentiment['neg'])
+            pos_arr.append(sentiment["pos"])
+            neg_arr.append(sentiment["neg"])
 
         blPlot.plot_graph([year_arr, pos_arr, neg_arr, title])
 
@@ -44,7 +46,7 @@ class blPlot:
         plt.figure()
         plt.title(title)
 
-        plt.plot(year_arr, pos_arr, '-go', label='Positive Percentage')
-        plt.plot(year_arr, neg_arr, '-ro', label='Negative Percentage')
-        plt.legend(loc='upper left')
-        plt.savefig(path_join('resources', 'storage', title + '.pdf'))
+        plt.plot(year_arr, pos_arr, "-go", label="Positive Percentage")
+        plt.plot(year_arr, neg_arr, "-ro", label="Negative Percentage")
+        plt.legend(loc="upper left")
+        plt.savefig(path_join("resources", "storage", title + ".pdf"))

@@ -46,19 +46,21 @@ class TobaccoController(Controller):
         response = blWordTag.analyze_word_tags(word_tags)
         data = blAnalyze.analyze_tweets(data)
         return Controller.redirect(
-            "TobaccoController@save_data", {
-                "data": data,
-                "cached": a_params["cached"],
-                "word_tags": response
-            }
+            "TobaccoController@save_data",
+            {"data": data, "cached": a_params["cached"], "word_tags": response},
         )
 
     @staticmethod
     def save_data(o_app, a_params):
         data = a_params["data"]
         data = blAnalyze.analyze_per_month(data)
-        blFile.save_word_tags_to_xls(a_params['word_tags'], path_join('resources', 'storage', 'WordTagsTobacco.xls'))
-        blFile.save_to_xlsx(data, path_join('resources', 'storage', 'TobaccoAnalysis.xls'))
+        blFile.save_word_tags_to_xls(
+            a_params["word_tags"],
+            path_join("resources", "storage", "WordTagsTobacco.xls"),
+        )
+        blFile.save_to_xlsx(
+            data, path_join("resources", "storage", "TobaccoAnalysis.xls")
+        )
 
         if not a_params["cached"]:
             blFile.save_object("data_tobacco", data)
@@ -68,7 +70,7 @@ class TobaccoController(Controller):
     @staticmethod
     def show_graph(o_app, a_params):
         print("Showing tobacco graph...")
-        data = a_params['data']
+        data = a_params["data"]
         data = blPlot.prepare_values(data)
-        blPlot.plot(data, 'Tobacco Analysis')
-        return Controller.redirect('WordCloudController@generate_word_cloud', {})
+        blPlot.plot(data, "Tobacco Analysis")
+        return Controller.redirect("WordCloudController@generate_word_cloud", {})
