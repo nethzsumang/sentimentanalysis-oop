@@ -71,5 +71,4 @@ class TobaccoController(Controller):
         data = a_params['data']
         data = blPlot.prepare_values(data)
         blPlot.plot(data, 'Tobacco Analysis')
-        input('Press enter to exit...')
-        return Controller.redirect(False)
+        return Controller.redirect('WordCloudController@generate_word_cloud', {})
