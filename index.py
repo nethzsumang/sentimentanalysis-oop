@@ -8,8 +8,8 @@ import nltk
 
 
 # download nltk data
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('wordnet')
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.download('wordnet', quiet=True)
 
 bootstrap.start()
