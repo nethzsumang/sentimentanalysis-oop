@@ -53,3 +53,12 @@ class libNltk:
         statement = textblob.Word(statement).lemmatize()
         _, tag = pos_tag([statement])[0]
         return [statement, tags[tag]]
+
+    @staticmethod
+    def remove_non_words(words):
+        word_arr = []
+        for word in words:
+            if textblob.Word(word).get_synsets():
+                word_arr.append(word)
+
+        return word_arr

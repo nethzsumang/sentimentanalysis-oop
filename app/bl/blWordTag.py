@@ -9,7 +9,7 @@ class blWordTag:
     @staticmethod
     def remove_noise(data):
         print("Getting word tags...")
-        TWEETS_TO_ANALYZE = 50
+        TWEETS_TO_ANALYZE = 100
         finished_word_tags = False
         word_tags = []
 
@@ -20,6 +20,8 @@ class blWordTag:
 
                     # separate tokens/words
                     statement_arr = libNltk.tokenize_sentence(statement)
+                    # removes non-words
+                    statement_arr = libNltk.remove_non_words(statement_arr)
                     # removes neutral words
                     statement_arr = libVader.remove_noise(statement_arr)
 
